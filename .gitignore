@@ -1,5 +1,4 @@
 # Ignore large datasets
-data/
 
 __pycache__/
 *.pyc
