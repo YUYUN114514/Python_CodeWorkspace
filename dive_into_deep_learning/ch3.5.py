@@ -24,6 +24,7 @@ def get_fashion_mnist_labels(labels):  #@save
                    'sandal', 'shirt', 'sneaker', 'bag', 'ankle boot']
     return [text_labels[int(i)] for i in labels]
 
+# 绘制图像，可视化
 def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5, filename=None):  #@save
     """绘制图像列表"""
     figsize = (num_cols * scale, num_rows * scale)
@@ -46,13 +47,27 @@ def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5, filename=None)
         plt.close()
     return axes
 
-X, y = next(iter(data.DataLoader(mnist_train, batch_size=18)))
-show_images(X.reshape(18, 28, 28), 2, 9, titles=get_fashion_mnist_labels(y), filename='fashion_mnist_samples.png');
+# X, y = next(iter(data.DataLoader(mnist_train, batch_size=18)))
+# show_images(X.reshape(18, 28, 28), 2, 9, titles=get_fashion_mnist_labels(y), filename='fashion_mnist_samples.png');
 # 2. 读取小批量
+batch_size = 256
 
+def get_dataloader_workers():  #@save
+    """使用4个进程来读取数据"""
+    return 4
 
+train_iter = data.DataLoader(mnist_train, batch_size, shuffle=True,
+                             num_workers=get_dataloader_workers())
+timer = d2l.Timer()
+if __name__ == '__main__':
+    for X, y in train_iter:
+        continue
+    print(f'{timer.stop():.2f} sec')
 # 3. 整合所有组件
-# 4. 小结
-# 5. 练习import torch
+# 4. 小结# 2. 读取小批量
+
+
+
+
 
 
